@@ -12,4 +12,4 @@
 - [ ] Double deep Q-network
 - [ ] Performance plot across time for double deep Q-network
 - [ ] Video on trained deep Q-network
-- [ ] Table double deep Q-network
+- [ ] Table for double deep Q-network
