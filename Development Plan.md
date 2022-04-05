@@ -1,0 +1,15 @@
+- [ ] Linear Q-network with experience replay and target fixing
+- [ ] Performance plot across time for linear Q-network
+- [ ] Table for linear Q-network
+- [ ] Linear double Q-network
+- [ ] Performance plot across time for linear double Q-network 
+- [ ] Video on trained linear double Q-network 
+- [ ] Table for linear double Q-network  
+- [ ] Deep Q-network
+- [ ] Performance plot across time for deep Q-network
+- [ ] Video on trained deep Q-network 
+- [ ] Table for deep Q-network
+- [ ] Double deep Q-network
+- [ ] Performance plot across time for double deep Q-network
+- [ ] Video on trained deep Q-network
+- [ ] Table double deep Q-network
