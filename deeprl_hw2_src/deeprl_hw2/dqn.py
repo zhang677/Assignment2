@@ -50,25 +50,6 @@ class DQNAgent:
                  batch_size):
         pass
 
-    def compile(self, optimizer, loss_func):
-        """Setup all of the TF graph variables/ops.
-
-        This is inspired by the compile method on the
-        keras.models.Model class.
-
-        This is a good place to create the target network, setup your
-        loss function and any placeholders you might need.
-        
-        You should use the mean_huber_loss function as your
-        loss_function. You can also experiment with MSE and other
-        losses.
-
-        The optimizer can be whatever class you want. We used the
-        keras.optimizers.Optimizer class. Specifically the Adam
-        optimizer.
-        """
-        pass
-
     def calc_q_values(self, state):
         """Given a state (or batch of states) calculate the Q-values.
 

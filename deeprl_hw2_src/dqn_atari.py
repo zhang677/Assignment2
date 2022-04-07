@@ -11,10 +11,10 @@ import numpy as np
 # from keras.models import Model
 # from keras.optimizers import Adam
 
-import deeprl_hw2 as tfrl
+import deeprl_hw2 as rlib
 from deeprl_hw2.dqn import DQNAgent
 from deeprl_hw2.objectives import mean_huber_loss
-
+import torch
 
 def create_model(window, input_shape, num_actions,
                  model_name='q_network'):  # noqa: D103

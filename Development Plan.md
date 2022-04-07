@@ -1,3 +1,9 @@
+- [x] Watch DQN videos
+- [x] Revisit Pytorch training
+- [ ] Collect the input 210x160x3 pictures to 84x84x1 using torchvision.transforms. Also need to get subwindow and cut out the other part
+- [ ] NCHW (32,4,84,84) -> nn.Conv2d(4, 32, kernel_size=8, stride=4, bias=false) -> F.relu -> nn.Conv2d(32, 64, kernel_size=4, stride=2, bias=false) -> F.relu -> nn.Conv2d(64, 64, kernel_size=3, stride=1, bias=false) -> F.relu -> nn.Linear(3136,512) -> F.relu -> Linear(512,actions)
+- [ ] Figure out the output of the environment
+- [ ] Use Wrapper to load env(4), clip reward?
 - [ ] Linear Q-network with experience replay and target fixing
 - [ ] Performance plot across time for linear Q-network
 - [ ] Table for linear Q-network
@@ -13,3 +19,5 @@
 - [ ] Performance plot across time for double deep Q-network
 - [ ] Video on trained deep Q-network
 - [ ] Table for double deep Q-network
+- [ ] Add the max operation in preprocess
+- [ ] Add BatchNorm after Conv layer
