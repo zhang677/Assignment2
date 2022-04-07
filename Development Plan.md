@@ -1,9 +1,11 @@
 - [x] Watch DQN videos
 - [x] Revisit Pytorch training
+- [ ] Use random action to successfully run an episode
 - [ ] Collect the input 210x160x3 pictures to 84x84x1 using torchvision.transforms. Also need to get subwindow and cut out the other part
+- [ ] Use random action to successfully run an episode with a Wrapper
 - [ ] NCHW (32,4,84,84) -> nn.Conv2d(4, 32, kernel_size=8, stride=4, bias=false) -> F.relu -> nn.Conv2d(32, 64, kernel_size=4, stride=2, bias=false) -> F.relu -> nn.Conv2d(64, 64, kernel_size=3, stride=1, bias=false) -> F.relu -> nn.Linear(3136,512) -> F.relu -> Linear(512,actions)
 - [ ] Figure out the output of the environment
-- [ ] Use Wrapper to load env(4), clip reward?
+- [ ] Use Wrapper to load env(4), clip reward when traing and build another Wrapper with original reward when testing
 - [ ] Linear Q-network with experience replay and target fixing
 - [ ] Performance plot across time for linear Q-network
 - [ ] Table for linear Q-network
