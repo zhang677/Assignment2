@@ -16,18 +16,18 @@
 - [x] Add main function argparse
 - [x] Add Double learn
 - [ ] Test the whole workflow
-- [ ] Linear Q-network with experience replay and target fixing
+- [x] Linear Q-network with experience replay and target fixing
 - [ ] Performance plot across time for linear Q-network
 - [ ] Table for linear Q-network
-- [ ] Linear double Q-network
+- [x] Linear double Q-network
 - [ ] Performance plot across time for linear double Q-network 
 - [ ] Video on trained linear double Q-network 
 - [ ] Table for linear double Q-network  
-- [ ] Deep Q-network
+- [x] Deep Q-network
 - [ ] Performance plot across time for deep Q-network
 - [ ] Video on trained deep Q-network 
 - [ ] Table for deep Q-network
-- [ ] Double deep Q-network
+- [x] Double deep Q-network
 - [ ] Performance plot across time for double deep Q-network
 - [ ] Video on trained deep Q-network
 - [ ] Table for double deep Q-network

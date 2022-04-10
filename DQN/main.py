@@ -5,7 +5,7 @@ import gym
 import numpy as np
 import matplotlib.pyplot as plt
 import argparse
-from Agent import DQNAgent
+from Agent import DQNAgent, LQNAgent
 from eval import Evaluation
 
 if __name__ == '__main__':
@@ -46,7 +46,7 @@ if __name__ == '__main__':
     # Initialize Agent
     epsilon_decrement = (args.max_eps-args.min_eps)/args.dec_eps
 
-    if args.model == 'DQN':
+    if args.model == 'DQN' or args.model == 'DDQN':
         agent = DQNAgent(
             input_shape=env.observation_space.shape,
             action_shape=env.action_space.n,
@@ -64,6 +64,24 @@ if __name__ == '__main__':
             checkpoint_dir=args.dir,
 
         )
+    elif args.model == 'LQN' or args.model == 'DLQN':
+        agent = LQNAgent(
+            input_shape=env.observation_space.shape,
+            action_shape=env.action_space.n,
+            gamma=args.gamma,
+            epsilon=args.max_eps,
+            learning_rate=args.lr,
+            batch_size=32,
+            memory_size=args.memory,
+            epsilon_minimum=args.min_eps,
+            epsilon_decrement=epsilon_decrement,
+            target_replace_frequency=args.freq,
+            replay_start_size = args.start,
+            leps = args.leps,
+            momentum = args.m,
+            checkpoint_dir=args.dir,
+
+        )      
     else:
         raise KeyError(f'{args.model} not implemented yet')
 
@@ -85,6 +103,7 @@ if __name__ == '__main__':
     scores, steps, rolling_means, epsilons = [], [], [], []
     current_step = 0
 
+    
     # Train adn Evaluation
     for episode in range(args.games):
         done = False
@@ -96,7 +115,10 @@ if __name__ == '__main__':
             score += reward
 
             agent.save_to_memory(observation, action, reward, new_observation, done)
-            agent.learn()
+            if args.model == 'DQN' or args.model == 'LQN':
+                agent.learn()
+            if args.model == 'DDQN' or args.model == 'DLQN':
+                agent.double_learn()
             observation = new_observation
             current_step += 1
             if args.eval:
