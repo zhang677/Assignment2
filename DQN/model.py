@@ -8,7 +8,7 @@ import numpy as np
 
 
 class DeepQNetwork(nn.Module):
-    def __init__(self, input_shape, output_shape, learning_rate, checkpoint_file):
+    def __init__(self, input_shape, output_shape, learning_rate, leps, momentum, checkpoint_file):
         super().__init__()
 
         self.input_shape = input_shape
@@ -28,7 +28,7 @@ class DeepQNetwork(nn.Module):
 
         self.loss = nn.functional.huber_loss 
         #self.loss = nn.MSELoss()
-        self.optimizer = optim.RMSprop(self.parameters(), lr=self.learning_rate, eps=0.01, momentum=0.95)
+        self.optimizer = optim.RMSprop(self.parameters(), lr=self.learning_rate, eps=leps, momentum=momentum)#eps=0.01, momentum=0.95)
         '''
         torch.nn.init.xavier_uniform_(self.conv1.weight)
         torch.nn.init.xavier_uniform_(self.conv2.weight)

@@ -10,7 +10,7 @@ class DQNAgent:
             self, input_shape, action_shape, gamma=0.99, epsilon=0.1, learning_rate=0.00025,
             batch_size=32, memory_size=1000000, epsilon_minimum=0.01,
             epsilon_decrement=9e-7, target_replace_frequency=10000, replay_start_size=50000,
-            checkpoint_dir='temp/'
+            leps=0.01, momentum=0.95, checkpoint_dir='temp/'
     ):
         self.gamma = gamma
         self.epsilon = epsilon
@@ -27,7 +27,7 @@ class DQNAgent:
 
         self.replay_memory = Memory(memory_size, input_shape)
         self.eval_network, self.target_network = self.create_networks(
-            input_shape, action_shape, learning_rate
+            input_shape, action_shape, learning_rate, leps, momentum
         )
 
     def create_networks(self, *args, **kwargs):

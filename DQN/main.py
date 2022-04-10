@@ -23,11 +23,13 @@ if __name__ == '__main__':
     parser.add_argument('--min_eps', default=0.01, type=float, help='Final exploration')
     parser.add_argument('--dec_eps', default=1000000, type=int, help='Final exploration frame')
     parser.add_argument('--freq', default=10000, type=int, help='Target network update frequency')
-    parser.add_argument('--gamma', default=0.99, type=int, help='Discount factor')
+    parser.add_argument('--gamma', default=0.99, type=float, help='Discount factor')
     parser.add_argument('--lr', default=0.00025, type=float, help='Learning rate')
     parser.add_argument('--games', default=200, type=int, help='Total episodes')
-    parser.add_argument('--eval', action='store_true', type=bool, help='Whether do eval during training')
+    parser.add_argument('--eval', action='store_true', help='Whether do eval during training')
     parser.add_argument('--epoch', default=1000, type=int, help='Eval epoch')
+    parser.add_argument('--leps', default=0.01, type=float, help='RMSLoss eps')
+    parser.add_argument('--m', default=0.95, type=float, help='RMSLoss momentum')
     args = parser.parse_args()
 
     if args.env == 'ALE/Enduro-v5':
@@ -57,7 +59,10 @@ if __name__ == '__main__':
             epsilon_decrement=epsilon_decrement,
             target_replace_frequency=args.freq,
             replay_start_size = args.start,
+            leps = args.leps,
+            momentum = args.m,
             checkpoint_dir=args.dir,
+
         )
     else:
         raise KeyError(f'{args.model} not implemented yet')
