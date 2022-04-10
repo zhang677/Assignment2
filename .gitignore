@@ -1,2 +1,3 @@
 .DS_Store
-/deeprl_hw2_src/DQN/temp
+/temp*
+__pycache__
