@@ -93,6 +93,7 @@ if __name__ == '__main__':
         while not done:
             action = agent.choose_action(observation)
             new_observation, reward, done, info = env.step(action)
+            score += reward
 
             agent.save_to_memory(observation, action, reward, new_observation, done)
             agent.learn()

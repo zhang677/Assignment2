@@ -43,11 +43,9 @@ class DQNAgent:
         if np.random.random() < self.epsilon:
             return np.random.choice(self.action_space)
 
-        self.eval_network.eval()
-        with torch.no_grad():
-            state = torch.tensor(np.array([observation]), dtype=torch.float)
-            state = state.to(self.eval_network.device)
-            actions = self.eval_network.forward(state)
+        state = torch.tensor(np.array([observation]), dtype=torch.float)
+        state = state.to(self.eval_network.device)
+        actions = self.eval_network.forward(state)
         return torch.argmax(actions).item()
 
     def replace_target_network(self):
@@ -90,15 +88,12 @@ class DQNAgent:
         self.replace_target_network()
         states, actions, rewards, next_states, done_flags = self.sample_memory() 
 
-        self.target_network.eval()
-        with torch.no_grad():
-            action_values_next = self.target_network.forward(next_states)
-            action_values_next = action_values_next.max(dim=1)[0]
-            action_values_next[done_flags] = 0.0
-            action_value_target = rewards + self.gamma * action_values_next
+        action_values_next = self.target_network.forward(next_states)
+        action_values_next = action_values_next.max(dim=1)[0]
+        action_values_next[done_flags] = 0.0
+        action_value_target = rewards + self.gamma * action_values_next
 
         # Propagate errors and step
-        self.eval_network.train()
         self.eval_network.optimizer.zero_grad()
         action_values = self.eval_network.forward(states)[self.batch_space, actions]
 
@@ -116,13 +111,10 @@ class DQNAgent:
 
         
         next_actions = self.choose_action(next_states)
-        self.target_network.eval()
-        with torch.no_grad():
-            action_values_next = self.target_network.forward(next_states)[self.batch_space,next_actions]
-            action_values_next[done_flags] = 0.0
-            action_value_target = rewards + self.gamma * action_values_next
+        action_values_next = self.target_network.forward(next_states)[self.batch_space,next_actions]
+        action_values_next[done_flags] = 0.0
+        action_value_target = rewards + self.gamma * action_values_next
         
-        self.eval_network.train()
         self.eval_network.optimizer.zero_grad()
         action_values = self.eval_network.forward(states)[self.batch_space, actions]
 
