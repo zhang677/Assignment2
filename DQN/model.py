@@ -59,6 +59,7 @@ class DeepQNetwork(nn.Module):
 
     def load_checkpoint(self):
         logging.info('Loading checkpoint')
+        print(f'Checkout file: {self.checkpoint_file}')
         self.load_state_dict(torch.load(self.checkpoint_file))
 
     def to_tensor(self, inputs):
