@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import argparse
 from Agent import DQNAgent, LQNAgent
 from eval import Evaluation
-
+import time
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Assignment 2')
     # Model name
@@ -104,7 +104,9 @@ if __name__ == '__main__':
     current_step = 0
 
     
-    # Train adn Evaluation
+    # Train and Evaluation and Visualization
+    vis_eps = []
+    vis_scores = []
     for episode in range(args.games):
         done = False
         observation = env.reset()
@@ -121,23 +123,29 @@ if __name__ == '__main__':
                 agent.double_learn()
             observation = new_observation
             current_step += 1
-            if args.eval:
-                if current_step % args.epoch == 0:
-                    Evaluation(current_step)
+            
 
         scores.append(score)
         steps.append(current_step)
-
+        
 
         rolling_mean = np.mean(scores[-rolling_average_n:])
         rolling_means.append(rolling_mean)
 
         print(f"Ep: {episode} | Score: {score} | Avg: {rolling_mean:.1f} | Best: {best_score:.1f}")
-
-        if score > best_score:
+        vis_eps.append(episode)
+        vis_scores.append(score)
+        if (score > best_score) or score == best_score:
             best_score = score
             agent.save_networks()
-
+        if args.eval:
+                if (episode % args.epoch) == 0:
+                    Evaluation(epoch=episode, directory=args.dir, eval_episodes=5, model = args.model)
+    plt.figure()
+    plt.plot(vis_eps, vis_scores)
+    plt.xlabel('episode')
+    plt.ylabel('score')
+    plt.savefig(args.dir + '/' + args.model + str(time.time()) + '.png')
 
     
 

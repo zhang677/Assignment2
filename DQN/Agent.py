@@ -26,6 +26,7 @@ class DQNAgent:
         self.current_step = 0
 
         self.replay_memory = Memory(memory_size, input_shape)
+        
         self.eval_network, self.target_network = self.create_networks(
             input_shape, action_shape, learning_rate, leps, momentum
         )
@@ -165,8 +166,8 @@ class LQNAgent:
 
     def create_networks(self, *args, **kwargs):
         return (
-            DeepQNetwork(*args, **kwargs, checkpoint_file=self.checkpoint_dir + 'lqn_eval'),
-            DeepQNetwork(*args, **kwargs, checkpoint_file=self.checkpoint_dir + 'lqn_target')
+            LinearQNetwork(*args, **kwargs, checkpoint_file=self.checkpoint_dir + 'lqn_eval'),
+            LinearQNetwork(*args, **kwargs, checkpoint_file=self.checkpoint_dir + 'lqn_target')
         )
 
     def random_action(self):

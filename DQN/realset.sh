@@ -7,7 +7,7 @@ python main.py \
 --model DQN \
 --env ALE/Enduro-v5 \
 --dir ${dir} \
---start 50000 --memory 1000000 --freq 10000 \
+--start 50000 --memory 10000 --freq 1000 \
 --max_eps 1 --min_eps 0.01 --dec_eps 1000000 \
 --gamma 0.99 --lr 0.00025 \
 --games 2000 \
